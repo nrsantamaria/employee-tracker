@@ -9,6 +9,7 @@ require('pg')
 
 get('/') do
   @divisions = Division.all
+
   erb(:index)
 end
 
@@ -55,6 +56,11 @@ post('/employees') do
   erb(:success)
 end
 
+get('/employees') do
+  @employees = Employee.all
+  erb(:employees)
+end
+
 get('/employees/:id') do
   @employee = Employee.find(params.fetch("id").to_i())
   @division = Division.find(@employee.division_id)
@@ -85,4 +91,60 @@ delete('/employees/:id') do
   @employee.delete
   @employees = Employee.all
   erb(:division)
+end
+
+get('/projects') do
+  @projects = Project.all
+  erb(:projects)
+end
+
+post('/projects') do
+  name = params.fetch("project_name")
+  project = Project.new({:name => name, :id => nil})
+  project.save
+  erb(:success)
+end
+
+get('/project') do
+  @project = Project.find(params.fetch('id').to_i())
+  @employees = Employee.all
+  erb(:project)
+end
+
+get('/projects/:id') do
+  @project = Project.find(params.fetch('id').to_i())
+  @employees = Employee.all
+  erb(:project)
+end
+
+patch('/projects/:id') do
+  project_id = params.fetch('id').to_i()
+  @project = Project.find(project_id)
+  employee_ids = params.fetch('employee_ids')
+  @project.update({:employee_ids => employee_ids})
+  @employees = Employee.all
+  erb(:project)
+end
+
+get('/projects/:id/edit') do
+  @project = Project.find(params.fetch('id').to_i())
+  erb(:project_edit)
+end
+
+
+delete('/projects/:id') do
+  @project = Project.find(params.fetch('id').to_i())
+  @project.delete
+  @projects = Project.all
+  erb(:index)
+end
+
+post('/employees') do
+  first_name = params.fetch('first_name')
+  last_name = params.fetch('last_name')
+  project_id = params.fetch('project_id').to_i()
+  @project = Project.find(project_id)
+  @employee = Employee.new({:first_name => first_name, :last_name => last_name, :project_id => project_id})
+  @employee.save
+  erb(:success)
 end

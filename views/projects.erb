@@ -1,0 +1,22 @@
+<h1>Create a new project</h1>
+
+<form action="/projects" method="post">
+  <label for="name">Project Name:</label>
+  <input id="project_name" name="project_name" type="text">
+
+  <button type="submit">Add Project</button>
+</form>
+
+<% if @projects.any?() %>
+<p>Click on a project to see its employees:</p>
+
+<ul>
+  <% @projects.each do |project| %>
+  <li><a href="/projects/<%= project.id() %>"><%= project.name() %></a></li>
+  <% end %>
+</ul>
+<% else %>
+<p>There are no projects yet!</p>
+<% end %>
+
+<a href="/"> Return to the Main Page </a>

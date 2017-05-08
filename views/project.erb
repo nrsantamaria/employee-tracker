@@ -1,0 +1,29 @@
+<h1><%= @project.name %></h1>
+
+<form action="/projects/<%= @project.id%>" method="post">
+  <input type="hidden" name="_method" value="patch">
+  <% @employees.each() do |employee|%>
+  <div class="checkbox">
+    <label>
+      <input type="checkbox" name="employee_ids[]" value="<%= employee.id()%>"><%= employee.first_name%> <%= employee.last_name%>
+    </label>
+  </div>
+<% end %>
+
+  <button type="submit">Add employees</button>
+</form>
+
+<% if @project.employees.any?() %>
+<h3> Here are all the employees working under this project </h3>
+
+  <ul>
+    <% @project.employees.each() do |employee| %>
+    <li><a href="/employees/<%= employee.id%>/edit"><%= employee.first_name %> <%= employee.last_name %></a></li>
+    <% end %>
+  </ul>
+
+<% else %>
+  <p> There are no employees yet!!</p>
+<% end %>
+
+<a href="/"> Return to the Main Page </a>

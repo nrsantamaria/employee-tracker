@@ -15,8 +15,8 @@ RSpec.configure do |config|
     Employee.all().each do |employee|
       employee.destroy()
     end
-    # Project.all().each do |project|
-    #   project.destroy()
-    # end
+    Project.all().each do |project|
+      project.destroy()
+    end
   end
 end
