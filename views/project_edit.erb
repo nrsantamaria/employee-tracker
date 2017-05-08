@@ -1,16 +1,14 @@
-<h1>Projects</h1>
-<ul>
-  <%@projects.each do |project|%>
-  <li><a href="/projects/<%= project.id %>"><%= project.name %></a> <a href="/projects/<%= project.id %>/edit">Update Project</a></li>
-  <% end %>
-</ul>
+<h1>Update Project</h1>
 
-<h1>Create Project</h1>
-
-<form action="/projects" method="post">
-  <label for="name">Enter the Project Name Here:</label>
+<form action="/projects/<%= @project.id%>" method="post">
+  <input type="hidden" name="_method" value="patch">
+  <label for="name">Enter the New Project Name Here:</label>
   <input type="text" name="name">
 
-  <button type="submit">Add Project</button>
+  <button type="submit">Update Project</button>
+</form>
 
+<form action="/projects/<%= @project.id %>" method="post">
+  <input type="hidden" name="_method" value="delete">
+  <button type="submit">Remove Project</button>
 </form>

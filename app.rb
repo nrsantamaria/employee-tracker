@@ -117,7 +117,7 @@ get('/projects/:id') do
   erb(:project)
 end
 
-patch('/projects/:id') do
+post('/projects/:id') do
   project_id = params.fetch('id').to_i()
   @project = Project.find(project_id)
   employee_ids = params.fetch('employee_ids')
@@ -127,16 +127,27 @@ patch('/projects/:id') do
 end
 
 get('/projects/:id/edit') do
+  @projects = Project.all
   @project = Project.find(params.fetch('id').to_i())
   erb(:project_edit)
 end
 
+patch('/projects/:id') do
+  name = params.fetch('name')
+  @project = Project.find(params.fetch('id').to_i())
+  @project.update({:name => name})
+  @projects = Project.all
+  @employees = Employee.all
+  erb(:project)
+end
 
 delete('/projects/:id') do
   @project = Project.find(params.fetch('id').to_i())
+  @employee = Employee.find(params.fetch('id').to_i())
   @project.delete
   @projects = Project.all
-  erb(:index)
+  @employees = Employee.all
+  erb(:projects)
 end
 
 post('/employees') do

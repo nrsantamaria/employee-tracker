@@ -1,7 +1,6 @@
 <h1><%= @project.name %></h1>
 
 <form action="/projects/<%= @project.id%>" method="post">
-  <input type="hidden" name="_method" value="patch">
   <% @employees.each() do |employee|%>
   <div class="checkbox">
     <label>
@@ -25,5 +24,5 @@
 <% else %>
   <p> There are no employees yet!!</p>
 <% end %>
-
+<a href="/projects/<%= @project.id%>/edit">Edit this project</a>
 <a href="/"> Return to the Main Page </a>
