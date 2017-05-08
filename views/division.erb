@@ -1,0 +1,31 @@
+<h1>Division:<%= @division.name%></h1>
+
+<p>
+  Add employees to division:
+</p>
+
+<form action="/employees" method="post">
+  <input type="hidden" name="division_id" value="<%= @division.id%>">
+  <label for="first_name">Enter the Employee First Name Here:</label>
+  <input type="text" name="first_name">
+  <label for="last_name">Enter the Employee Last Name Here:</label>
+  <input type="text" name="last_name">
+
+  <button type="submit">Add Employees</button>
+</form>
+
+
+<% if @division.employees.any?() %>
+<h3> Here are all the employees working under this division </h3>
+
+  <ul>
+    <% @division.employees.each() do |employee| %>
+    <li><a href="/employees/<%= employee.id%>/edit"><%= employee.first_name %> <%= employee.last_name %></a></li>
+    <% end %>
+  </ul>
+
+<% else %>
+  <p> There are no employees yet!!</p>
+<% end %>
+
+<a href="/"> Return to the Main Page </a>

@@ -1,0 +1,17 @@
+<h1>Update Employees</h1>
+
+<form action="/employees/<%= @employee.id %>" method="post">
+  <input type="hidden" name="_method" value="patch">
+  <input type="hidden" name="division_id" value="<%= @division.id%>">
+  <label for="first_name">Enter the New employee first name Here:</label>
+  <input type="text" name="first_name">
+  <label for="last_name">Enter the New employee last name Here:</label>
+  <input type="text" name="last_name">
+
+  <button type="submit">Update employee</button>
+</form>
+
+<form action="/employees/<%= @employee.id %>" method="post">
+  <input type="hidden" name="_method" value="delete">
+  <button type="submit">Remove employee</button>
+</form>

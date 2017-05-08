@@ -1,0 +1,16 @@
+<h1>Company Divisions</h1>
+<ul>
+  <%@divisions.each do |division|%>
+  <li><a href="/divisions/<%= division.id %>"><%= division.name %></a> <a href="/divisions/<%= division.id %>/edit">Update Division</a></li>
+  <% end %>
+</ul>
+
+<h1>Create Divisions</h1>
+
+<form action="/divisions" method="post">
+  <label for="name">Enter the Division Name Here:</label>
+  <input type="text" name="name">
+
+  <button type="submit">Add Division</button>
+
+</form>
